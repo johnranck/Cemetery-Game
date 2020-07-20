@@ -14,17 +14,17 @@ public class FadeTwoTwo : MonoBehaviour
         yield return StartCoroutine(DoFade());
         /*yield return new WaitForSeconds(2);*/
         yield return StartCoroutine(Offing());
+        yield return Zero();
     }
 
 
- IEnumerator DoFade()
+    IEnumerator DoFade()
     {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        while (canvasGroup.alpha > 0.009)
+        while (canvasGroup.alpha > 0.01)
         {
             canvasGroup.alpha -= Time.deltaTime /1;
-            yield return null;
-            
+            yield return null;            
         }
         canvasGroup.interactable = false; 
     }
@@ -34,6 +34,18 @@ public class FadeTwoTwo : MonoBehaviour
     {
         yield return null; 
         FindObjectOfType<SignTwoTwo>().Off();
+    }
+
+
+    IEnumerator Zero()
+    {
+        CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+        while (canvasGroup.alpha > 0)
+        {
+            canvasGroup.alpha = 0;
+            yield return null;
+        }
+        canvasGroup.interactable = false;
     }
 
 

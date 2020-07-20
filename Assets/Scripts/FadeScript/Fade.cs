@@ -20,7 +20,7 @@ public class Fade : MonoBehaviour
  IEnumerator DoFade()
     {
         CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
-        while (canvasGroup.alpha > 0)
+        while (canvasGroup.alpha > 0.009)
         {
             canvasGroup.alpha -= Time.deltaTime / 1;
             yield return null;

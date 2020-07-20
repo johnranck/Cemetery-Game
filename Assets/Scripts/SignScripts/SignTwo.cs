@@ -22,12 +22,12 @@ public class SignTwo : MonoBehaviour
             if (talkBox.activeInHierarchy)
             {
                 /*talkBox.SetActive(false); */
-                FindObjectOfType<FadeTwoTwo>().FadeMeOut();
+                FindObjectOfType<Fade>().FadeMeOut();
             }
             else
             {
                talkBox.SetActive(true);
-                FindObjectOfType<FadeTwoTwo>().FadeMeIn();
+                FindObjectOfType<Fade>().FadeMeIn();
             }
         }
     }
@@ -45,7 +45,7 @@ public class SignTwo : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            FindObjectOfType<FadeTwoTwo>().FadeMeOut();
+            FindObjectOfType<Fade>().FadeMeOut();
         }
     }
 
