@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class TalkingStone : MonoBehaviour
 {
 
-    InkTestingScript inkTestingScript = new InkTestingScript();
-
     public GameObject talkBox;
     public bool playerInRange;
 
@@ -23,13 +21,13 @@ public class TalkingStone : MonoBehaviour
         {
             if (talkBox.activeInHierarchy)
             {
-              //  talkBox.SetActive(true);
-                FindObjectOfType<InkTestingScript>().refreshUI();
-
+                /*talkBox.SetActive(false); */
+               // FindObjectOfType<billFade>().FadeMeOut();
             }
             else
             {
-                talkBox.SetActive(false);
+                talkBox.SetActive(true);
+                FindObjectOfType<InkTestingScript>().refreshUI();
             }
         }
     }
@@ -47,8 +45,7 @@ public class TalkingStone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            FindObjectOfType<InkTestingScript>().eraseUI();
-            FindObjectOfType<InkTestingScript>().storyReset(); 
+           // FindObjectOfType<billFade>().FadeMeOut();
         }
     }
 
