@@ -16,15 +16,19 @@ public class InkTestingScript : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-       story = new Story(inkJSON.text);
-       refreshUI(); 
+      story = new Story(inkJSON.text);
+       //refreshUI(); 
+    }
+
+    public void storyReset()
+    {
+        story = new Story(inkJSON.text);
+
     }
 
 
     public void refreshUI()
     {
-        story = new Story(inkJSON.text);
-
         eraseUI();
         Text storyText = Instantiate(textPrefab) as Text;
 
@@ -53,10 +57,11 @@ public class InkTestingScript : MonoBehaviour
                 chooseStoryChoice(choice);
             });
         }
+
     }
 
 
-    void eraseUI()
+   public void eraseUI()
     {
         for(int i = 0; i < this.transform.childCount; i++)
         {
@@ -78,7 +83,12 @@ public class InkTestingScript : MonoBehaviour
         if (story.canContinue)
         {
             text = story.ContinueMaximally();
+
         }
-        return text; 
+        return text;
     }
+
+
+   
+    
 }
