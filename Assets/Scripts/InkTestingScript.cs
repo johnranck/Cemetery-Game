@@ -17,13 +17,17 @@ public class InkTestingScript : MonoBehaviour
     public void Start()
     {
        story = new Story(inkJSON.text);
-       refreshUI(); 
+      // refreshUI(); 
     }
 
 
-    public void refreshUI()
+    public void refreshStory()
     {
         story = new Story(inkJSON.text);
+    }
+
+    public void refreshUI()
+    {
 
         eraseUI();
         Text storyText = Instantiate(textPrefab) as Text;
@@ -56,7 +60,7 @@ public class InkTestingScript : MonoBehaviour
     }
 
 
-    void eraseUI()
+    public void eraseUI()
     {
         for(int i = 0; i < this.transform.childCount; i++)
         {
