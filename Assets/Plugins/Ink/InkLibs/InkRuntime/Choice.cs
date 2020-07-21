@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Ink.Runtime
 {
     /// <summary>
@@ -25,6 +27,11 @@ namespace Ink.Runtime
             set {
                 targetPath = new Path (value);
             }
+        }
+
+        public T GetComponentInChildren<T>()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
