@@ -13,16 +13,13 @@ public class InkTestingScript : MonoBehaviour
     private Story story;
     public Text textPrefab;
     public Button buttonPrefab;
-    public VerticalLayoutGroup verticalLayoutGroup;
-    public int left;
-    public List<string>tags;
+
 
     // Start is called before the first frame update
     public void Start()
     {
        story = new Story(inkJSON.text);
         // refreshUI();
-        textPrefab.alignment = TextAnchor.LowerCenter;
     }
 
 
@@ -33,36 +30,17 @@ public class InkTestingScript : MonoBehaviour
 
     public void refreshUI()
     {
-        
         eraseUI();
 
-        
 
         Text storyText = Instantiate(textPrefab) as Text;
 
+        string text = loadStoryChunk();
 
         List<string> tags = story.currentTags;
 
-        if (tags.Contains("rock"))
-        {
-            textPrefab.alignment = TextAnchor.LowerRight;
 
-        }
-        else if (tags.Contains("me"))
-        {
-            textPrefab.alignment = TextAnchor.LowerCenter;
-        }
-        else
-        {
-            textPrefab.alignment = TextAnchor.LowerCenter;
-        }
-
-
-        string text = loadStoryChunk();
-
-
-
-
+        //to add bold font to tags as per the tutorial
         /*
         if(tags.Count > 0)
         {
@@ -71,13 +49,9 @@ public class InkTestingScript : MonoBehaviour
         }
         */
 
+
         storyText.text = text;
         storyText.transform.SetParent(this.transform, true);
-
-
-
-       
-
 
 
         foreach (Choice choice in story.currentChoices)
@@ -95,7 +69,6 @@ public class InkTestingScript : MonoBehaviour
     }
 
    
-
     public void eraseUI()
     {
         for(int i = 0; i < this.transform.childCount; i++)
@@ -117,16 +90,35 @@ public class InkTestingScript : MonoBehaviour
 
         if (story.canContinue)
         {
-          //  FindObjectOfType<PlayerMovement>().Freeze(); 
-            text = story.Continue();
+            //  FindObjectOfType<PlayerMovement>().Freeze();
+            text = story.Continue();  
         }
-        return text; 
+        return text;
     }
 
 
 
+    /*
+     *
+     * trying to move text prefab with the tags in ink.....not working well.
+         List<string> tags = story.currentTags;
 
-    
+
+            if (tags.Contains("rock"))
+            {
+                textPrefab.alignment = TextAnchor.LowerRight;
+
+            }
+            else if (tags.Contains("me"))
+            {
+                textPrefab.alignment = TextAnchor.LowerCenter;
+            }
+            else
+            {
+                textPrefab.alignment = TextAnchor.LowerCenter;
+            }
+
+     */
 
     
 }
