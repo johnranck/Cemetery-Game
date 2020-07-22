@@ -1,30 +1,55 @@
-What do you want? #rock
+what do you want? 
 
-+[Hello] I just wanted to say hi. 
-+[Don't be rude] you dont have to be rude. 
++[hello] -> Divert2
 
-- 
++[i'm lost] i'm lost! any help? 
+
+-
 
 -> Divert1
 
 == Divert1 ==
- Well yr <i>wasting</i> my time. i have things to get done today. 
+ so you don't know where you are. that's unfortunate.  
  
- +[about the cave] do you know the cave??
- i know that a few years ago it collapsed. 
- ++[Go back] -> Divert1
+ +[how did i die?] how did i die? #me
+ {&i don't know. | i don't care} #rock
+ -> Divert1
  
- +[About the town] what's going on in the little town? 
- nothing. never anyhting. 
- ++ [Go Back] -> Divert1
+ +[how do i leave?] how do i leave this place? #me
+ {you can't leave. you're dead. | you could try to leave again} #rock
+  -> Divert1
  
- +[about the lake] can you tell me about the lake? 
- no i can't. it's lake secert. 
- ++ [Go Back] -> Divert1
+ +[how can you talk?] how can you talk? 
+ {~i'm one of those new talking graves. | i'm an easter island head | all graves can talk}
+  -> Divert1
  
- +[Leave] sorry, i should go. 
- ++[Continue] -> EndPart
- 
-== EndPart == 
+ +[are you serious?]
+ -> Serious
 
+ 
+ == Divert2 ==
+hi - i'm new here. what is this place? 
+this place is the end forever. 
+
++[but where am i?]
+-> Divert1
+
+
+== Serious ==
+yes i am. stonefaced. 
+
++[what's with the weather here?] what's with the weather here?
+it's usually temperate in the cemetery
+++ [go back] ->Serious
+
++[Leave] sorry, i should go. 
+ ++[Continue] -> EndPart
+
+
+
+
+== EndPart == 
 -> END
+
+
+
