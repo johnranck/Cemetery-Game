@@ -49,7 +49,7 @@ public class InkTestingScript : MonoBehaviour
         }
         */
 
-
+        
         storyText.text = text;
         storyText.transform.SetParent(this.transform, true);
 
