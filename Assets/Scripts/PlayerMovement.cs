@@ -45,4 +45,15 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.MovePosition(
             transform.position + change * speed * Time.deltaTime);
     }
+
+    public void Freeze()
+    {
+        myRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    public void UnFreeze()
+    {
+        myRigidbody.constraints = RigidbodyConstraints2D.None;
+    }
 }
+

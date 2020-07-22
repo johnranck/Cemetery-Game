@@ -74,15 +74,17 @@ public class InkTestingScript : MonoBehaviour
         refreshUI();
     }
 
-
+    
     string loadStoryChunk()
     {
         string text = "";
 
         if (story.canContinue)
         {
+          //  FindObjectOfType<PlayerMovement>().Freeze(); 
             text = story.ContinueMaximally();
         }
         return text; 
     }
+
 }
