@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
+    public bool isFrozen = false; 
     public float speed;
     private Rigidbody2D myRigidbody;
     private Vector3 change;
@@ -21,8 +22,10 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
         change.x = Input.GetAxisRaw("Horizontal");
         change.y = Input.GetAxisRaw("Vertical");
-        UpdateAnimationAndMove(); 
-
+        if (isFrozen == false)
+        {
+            UpdateAnimationAndMove();
+        }
     }
 
     void UpdateAnimationAndMove()
@@ -48,12 +51,13 @@ public class PlayerMovement : MonoBehaviour
 
     public void Freeze()
     {
-        myRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        isFrozen = true; 
     }
 
     public void UnFreeze()
     {
-        myRigidbody.constraints = RigidbodyConstraints2D.None;
+        isFrozen = false;
     }
 }
 

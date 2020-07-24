@@ -22,11 +22,13 @@ public class TalkingStone : MonoBehaviour
             if (talkBox.activeInHierarchy)
             {
                 talkBox.SetActive(true);
-                FindObjectOfType<InkTestingScript>().refreshUI();
+                talkBox.GetComponent<InkTestingScript>().ShowPanels();
+                talkBox.GetComponent<InkTestingScript>().refreshUI();
             }
             else
             {
                 talkBox.SetActive(false);
+                talkBox.GetComponent<InkTestingScript>().HidePanels();
             }
         }
     }
@@ -44,8 +46,9 @@ public class TalkingStone : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            FindObjectOfType<InkTestingScript>().eraseUI();
-            FindObjectOfType<InkTestingScript>().refreshStory(); 
+            talkBox.GetComponent<InkTestingScript>().eraseUI();
+            talkBox.GetComponent<InkTestingScript>().refreshStory();
+            talkBox.GetComponent<InkTestingScript>().HidePanels(); 
         }
     }
 

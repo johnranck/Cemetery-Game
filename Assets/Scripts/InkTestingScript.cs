@@ -8,11 +8,13 @@ using UnityEngine.UI;
 public class InkTestingScript : MonoBehaviour
 {
 
-
+    public GameObject dialogPanel;
+    public GameObject buttonPanel; 
     public TextAsset inkJSON;
     private Story story;
     public Text textPrefab;
     public Button buttonPrefab;
+    List<string> tags; 
 
 
     // Start is called before the first frame update
@@ -20,6 +22,11 @@ public class InkTestingScript : MonoBehaviour
     {
        story = new Story(inkJSON.text);
         // refreshUI();
+
+        dialogPanel = this.transform.GetChild(0).gameObject;
+        buttonPanel = dialogPanel.transform.GetChild(0).gameObject;
+
+        dialogPanel.SetActive(false); 
     }
 
 
@@ -51,7 +58,8 @@ public class InkTestingScript : MonoBehaviour
 
         
         storyText.text = text;
-        storyText.transform.SetParent(this.transform, true);
+        storyText.transform.SetParent(dialogPanel.transform, true);
+        storyText.transform.SetAsFirstSibling(); 
 
 
         foreach (Choice choice in story.currentChoices)
@@ -59,7 +67,7 @@ public class InkTestingScript : MonoBehaviour
             Button choiceButton = Instantiate(buttonPrefab) as Button;
             Text choiceText = choiceButton.GetComponentInChildren<Text>();
             choiceText.text = choice.text;
-            choiceButton.transform.SetParent(this.transform, false);
+            choiceButton.transform.SetParent(buttonPanel.transform, false);
 
             choiceButton.onClick.AddListener(delegate
             {
@@ -68,13 +76,33 @@ public class InkTestingScript : MonoBehaviour
         }
     }
 
-   
+    
     public void eraseUI()
     {
-        for(int i = 0; i < this.transform.childCount; i++)
+
+
+
+        if (dialogPanel.transform.childCount > 0)
         {
-            Destroy(this.transform.GetChild(i).gameObject); 
+            for (int i = 0; i < dialogPanel.transform.childCount; i++)
+            {
+                GameObject obj = dialogPanel.transform.GetChild(i).gameObject;
+                if (obj.GetComponent<Text>() != null)
+                {
+                    Destroy(dialogPanel.transform.GetChild(i).gameObject);
+                }
+            }
         }
+
+        if (buttonPanel.transform.childCount > 0)
+        {
+
+            for (int i = 0; i < buttonPanel.transform.childCount; i++)
+            {
+                Destroy(buttonPanel.transform.GetChild(i).gameObject);
+            }
+        }
+        
     }
 
     void chooseStoryChoice(Choice choice)
@@ -83,16 +111,33 @@ public class InkTestingScript : MonoBehaviour
         refreshUI();
     }
 
-    
+
+    public void HidePanels()
+    {
+        dialogPanel.SetActive(false); 
+    }
+
+    public void ShowPanels()
+    {
+        dialogPanel.SetActive(true);
+    }
+
+
     string loadStoryChunk()
     {
         string text = "";
 
         if (story.canContinue)
         {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().Freeze(); 
             //  FindObjectOfType<PlayerMovement>().Freeze();
             text = story.Continue();  
         }
+        else
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().UnFreeze(); 
+        }
+
         return text;
     }
 
