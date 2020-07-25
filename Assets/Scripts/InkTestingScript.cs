@@ -22,10 +22,8 @@ public class InkTestingScript : MonoBehaviour
     {
        story = new Story(inkJSON.text);
         // refreshUI();
-
         dialogPanel = this.transform.GetChild(0).gameObject;
         buttonPanel = dialogPanel.transform.GetChild(0).gameObject;
-
         dialogPanel.SetActive(false); 
     }
 
@@ -37,15 +35,14 @@ public class InkTestingScript : MonoBehaviour
 
     public void refreshUI()
     {
-        eraseUI();
 
+        eraseUI();
 
         Text storyText = Instantiate(textPrefab) as Text;
 
         string text = loadStoryChunk();
 
         List<string> tags = story.currentTags;
-
 
         //to add bold font to tags as per the tutorial
         /*
@@ -56,11 +53,9 @@ public class InkTestingScript : MonoBehaviour
         }
         */
 
-        
         storyText.text = text;
         storyText.transform.SetParent(dialogPanel.transform, true);
         storyText.transform.SetAsFirstSibling(); 
-
 
         foreach (Choice choice in story.currentChoices)
         {
@@ -76,12 +71,8 @@ public class InkTestingScript : MonoBehaviour
         }
     }
 
-    
     public void eraseUI()
     {
-
-
-
         if (dialogPanel.transform.childCount > 0)
         {
             for (int i = 0; i < dialogPanel.transform.childCount; i++)
@@ -96,13 +87,11 @@ public class InkTestingScript : MonoBehaviour
 
         if (buttonPanel.transform.childCount > 0)
         {
-
             for (int i = 0; i < buttonPanel.transform.childCount; i++)
             {
                 Destroy(buttonPanel.transform.GetChild(i).gameObject);
             }
         }
-        
     }
 
     void chooseStoryChoice(Choice choice)
@@ -122,7 +111,6 @@ public class InkTestingScript : MonoBehaviour
         dialogPanel.SetActive(true);
     }
 
-
     string loadStoryChunk()
     {
         string text = "";
@@ -137,17 +125,13 @@ public class InkTestingScript : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().UnFreeze(); 
         }
-
         return text;
     }
-
-
 
     /*
      *
      * trying to move text prefab with the tags in ink.....not working well.
          List<string> tags = story.currentTags;
-
 
             if (tags.Contains("rock"))
             {
@@ -162,8 +146,5 @@ public class InkTestingScript : MonoBehaviour
             {
                 textPrefab.alignment = TextAnchor.LowerCenter;
             }
-
      */
-
-    
 }
